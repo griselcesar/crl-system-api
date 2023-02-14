@@ -2,12 +2,14 @@ const express = require("express");
 const morgan = require("morgan");
 const swaggerUI = require("swagger-ui-express");
 const swaggerDocJS = require("swagger-jsdoc");
+const cors = require("cors");
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
+app.use(cors("*"));
 
 app.get("/", (req, res) => {
   res.status(200).json({
@@ -21,7 +23,9 @@ const swaggerSpec = require("./doc/swaggerSpec");
 app.use(
   "/api-doc",
   swaggerUI.serve,
-  swaggerUI.setup(swaggerDocJS(swaggerSpec),{customSiteTitle:"CLR System API DOC"})
+  swaggerUI.setup(swaggerDocJS(swaggerSpec), {
+    customSiteTitle: "CLR System API DOC",
+  })
 );
 
 //EndPoints de la API

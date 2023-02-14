@@ -2,7 +2,6 @@ const clientService = require("../models/clients.model");
 
 const getAllClients = (req, res) => {
   let { query } = req;
-  console.log(query);
   clientService
     .find()
     .then((clients) => {
